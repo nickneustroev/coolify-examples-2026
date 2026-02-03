@@ -1,11 +1,11 @@
-FROM node:22 AS build
+FROM node:22.22.0 AS build
 WORKDIR /app
 COPY package.json package-lock.json\* ./
 RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM node:22
+FROM node:22.22.0
 WORKDIR /app
 COPY --from=build /app/.output/ ./
 ENV PORT=3000
